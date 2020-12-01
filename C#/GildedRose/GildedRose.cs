@@ -6,12 +6,22 @@ namespace GildedRose
     public class GildedRose
     {
         public IList<Item> Items { get; set; }
+        public IList<BaseItem> BaseItems { get; set; }
+        public const int MinimumQuality = 0;
+        public const int MaximumQuality = 50;
+        public const int Deadline = 0;
+        public const int DeadlineToDuplicateQuality = 10;
+        public const int DeadlineToTriplicateQuality = 5;
         public GildedRose(IList<Item> Items)
         {
             this.Items = Items;
         }
+        public GildedRose(IList<BaseItem> Items)
+        {
+            this.BaseItems = Items;
+        }
 
-        public void UpdateQuality()
+        public void UpdateItemsProperty()
         {
             foreach (var item in Items)
             {
@@ -30,45 +40,50 @@ namespace GildedRose
                         break;
                 }
             }
+
+           
+
+        }
+
+        public void UpdateBaseItems()
+        {
+            foreach (var baseItem in BaseItems)
+            {
+                baseItem.UpdateItemProperties();
+            }
         }
 
         private void UpdateBackstagePasses(Item item)
         {
-            IncreaseQualityValue(item);
-            IncreasesQualityDaysBeforeConcert(item);
-            DecreaseSellInProperty(item);
-            if (item.SellIn < 0) item.Quality = 0;
-
+            DecreaseSellInProperty(item);  
+            item.Quality = (item.SellIn < Deadline) ? MinimumQuality : item.Quality + QualityIncreaseForBackstagePasses(item);
         }
 
         private void UpdateAgedItem(Item item)
         {
-            IncreaseQualityValue(item);
             DecreaseSellInProperty(item);
-            if (item.SellIn < 0) IncreaseQualityValue(item);
+            item.Quality += QualityValueIncrease(item);
 
         }
 
         private void UpdateOrdinaryItem(Item item)
         {
-            DecreaseQualityValue(item);
             DecreaseSellInProperty(item);
-            if (item.SellIn < 0) DecreaseQualityValue(item);
+            item.Quality -= QualityValueDecrease(item);
         }
 
-        private static void DecreaseQualityValue(Item item)
+        private static int QualityValueDecrease(Item item)
         {
-            if (item.Quality > 0)
-            {
-                item.Quality--;
-            }
+            if (item.SellIn < Deadline && item.Quality -2 >= MinimumQuality) return 2;
+            if (item.Quality - 1 >= MinimumQuality) return 1;
+            return 0;
         }
-        private static void IncreaseQualityValue(Item item)
+        private static int QualityValueIncrease(Item item)
         {
-            if (item.Quality < 50)
-            {
-                item.Quality++;
-            }
+            if (item.SellIn < Deadline && item.Quality + 2 <= MaximumQuality) return 2;
+            if (item.Quality + 1 <= MaximumQuality) return 1;
+            return 0;
+
         }
 
 
@@ -77,18 +92,16 @@ namespace GildedRose
             item.SellIn--;
         }
 
-        private static void IncreasesQualityDaysBeforeConcert(Item item)
+        private static int QualityIncreaseForBackstagePasses(Item item)
         {
-            if (item.SellIn < 11 && item.Quality < 50)
-            {
-                item.Quality++;
-            }
-
-            if (item.SellIn < 6 && item.Quality < 50)
-            {
-                item.Quality++;
-            }
+            if (item.SellIn <= DeadlineToTriplicateQuality && item.Quality + 3 <= MaximumQuality) return 3;
+            if (item.SellIn <= DeadlineToDuplicateQuality && item.Quality + 2 <= MaximumQuality) return 2;
+            return 1;
 
         }
     }
+
+   
 }
+    
+

@@ -31,7 +31,7 @@ namespace GildedRose.Tests
             initialList.Add(legendaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
             expectedLegendaryItem.Quality.Should().Be(80);
@@ -46,7 +46,7 @@ namespace GildedRose.Tests
             initialList.Add(ordinaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedItem = gildedRose.Items.First(item => item.Name == "Cheetos");
             expectedItem.Quality.Should().Be(34);
@@ -60,7 +60,7 @@ namespace GildedRose.Tests
             initialList.Add(ordinaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedItem = gildedRose.Items.First(item => item.Name == "Cheetos");
             expectedItem.Quality.Should().Be(33);
@@ -74,7 +74,7 @@ namespace GildedRose.Tests
             initialList.Add(agedItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedAgedItem = gildedRose.Items.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(36);
@@ -88,7 +88,7 @@ namespace GildedRose.Tests
             initialList.Add(agedItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedAgedItem = gildedRose.Items.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(37);
@@ -102,7 +102,7 @@ namespace GildedRose.Tests
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(36);
@@ -116,7 +116,7 @@ namespace GildedRose.Tests
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(37);
@@ -130,7 +130,7 @@ namespace GildedRose.Tests
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(38);
@@ -144,7 +144,7 @@ namespace GildedRose.Tests
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateQuality();
+            gildedRose.UpdateItemsProperty();
 
             Item expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(0);
@@ -152,32 +152,19 @@ namespace GildedRose.Tests
         }
 
         [Test]
-        public void Check_UpdateQuality_For_List_Of_Four_Items()
+        public void Check_Creation_Legendary_Item()
         {
-            Item ordinaryItem = new Item() { Name = "Cheetos", SellIn = 2, Quality = 35 };
-            Item legendaryItem = new Item() { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 };
-            Item agedItem = new Item() { Name = "Aged Brie", SellIn = 0, Quality = 35 };
-            Item backstagePasessItem = new Item() { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 35 };
-            IList<Item> initialList = new List<Item>();
-            initialList.Add(legendaryItem);
-            initialList.Add(ordinaryItem);
-            initialList.Add(agedItem);
-            initialList.Add(backstagePasessItem);
-            GildedRose gildedRose = new GildedRose(initialList);
+            LegendaryItem legendaryItem = new LegendaryItem();
+            //AgedBrie agedItem = new AgedBrie("Aged Brie", 35, 3);
+            IList<BaseItem> basedList = new List<BaseItem>();
+            basedList.Add(legendaryItem);
+           // basedList.Add(agedItem);
+            GildedRose gildedRose = new GildedRose(basedList );
 
-            gildedRose.UpdateQuality();
-
-            Item expectedItem = gildedRose.Items.First(item => item.Name == "Cheetos");
-            expectedItem.Quality.Should().Be(34);
-            Item expectedAgedItem = gildedRose.Items.First(item => item.Name == "Aged Brie");
-            expectedAgedItem.Quality.Should().Be(37);
-            Item expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
-            expectedBackstagePassesItem.Quality.Should().Be(38);
-
-
-
+            gildedRose.UpdateBaseItems();
+            Item expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            expectedLegendaryItem.Quality.Should().Be(80);
         }
-
 
     }
 }
