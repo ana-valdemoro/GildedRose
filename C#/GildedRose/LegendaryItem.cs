@@ -10,8 +10,7 @@ namespace GildedRose
         public LegendaryItem(): base( "Sulfuras, Hand of Ragnaros", 80, 0) { }
 
 
-        public override void UpdateItemProperties()
-        {
+        public override void UpdateItemProperties() {
             //Do nothing because Legendary Items do not change their properties
         }
     }

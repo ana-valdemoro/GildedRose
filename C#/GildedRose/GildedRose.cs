@@ -45,10 +45,8 @@ namespace GildedRose
 
         }
 
-        public void UpdateBaseItems()
-        {
-            foreach (var baseItem in BaseItems)
-            {
+        public void UpdateBaseItems() {
+            foreach (var baseItem in BaseItems) {
                 baseItem.UpdateItemProperties();
             }
         }

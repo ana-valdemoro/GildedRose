@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GildedRose
-{
-    public abstract class BaseItem : Item
-    {
-        public BaseItem(string Name, int Quality, int SellIn)
-        {
-            base.Name = Name;
-            base.Quality = Quality;
-            base.SellIn = SellIn;
+﻿namespace GildedRose {
+    public abstract class BaseItem : Item {
+      
+        public BaseItem(string name, int quality, int sellIn) {
+            Name = name;
+            Quality = quality;
+            SellIn = sellIn;
         }
-
 
 
         public abstract void UpdateItemProperties();
