@@ -1,18 +1,15 @@
 ﻿namespace GildedRose {
     public class OrdinaryItem: BaseItem {
 
-        public const int Deadline = 0;
-        public const int MinimumQuality = 0;
-
         public OrdinaryItem(string name, int quality, int sellIn) : base(name, quality, sellIn) { }
 
-        public override void UpdateItemProperties() {
-            UpdateSellInProperty();
-            UpdateQualityProperty();
+        protected internal override void UpdateState() {
+            UpdateSellIn();
+            UpdateQuality();
 
         }
 
-        private void UpdateQualityProperty() {
+        private void UpdateQuality() {
             Quality -= QualityDecrease();
         }
         private int QualityDecrease() {

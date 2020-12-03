@@ -12,13 +12,11 @@ namespace GildedRose
         public const int Deadline = 0;
         public const int DeadlineToDuplicateQuality = 10;
         public const int DeadlineToTriplicateQuality = 5;
-        public GildedRose(IList<Item> Items)
-        {
+        public GildedRose(IList<Item> Items) {
             this.Items = Items;
         }
-        public GildedRose(IList<BaseItem> Items)
-        {
-            this.BaseItems = Items;
+        public GildedRose(IList<BaseItem> baseItems) {
+            BaseItems = baseItems;
         }
 
         public void UpdateItemsProperty()
@@ -47,7 +45,7 @@ namespace GildedRose
 
         public void UpdateBaseItems() {
             foreach (var baseItem in BaseItems) {
-                baseItem.UpdateItemProperties();
+                baseItem.UpdateState();
             }
         }
 

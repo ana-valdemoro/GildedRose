@@ -1,11 +1,8 @@
 ﻿namespace GildedRose {
     public class AgedBrie : BaseItem {
-        public const int Deadline = 0;
-        public const int MaximumQuality = 50;
-
         public AgedBrie(int quality, int sellIn) : base("Aged Brie", quality, sellIn){ }
-    
-        public override void UpdateItemProperties() {
+
+        protected internal override void UpdateItemProperties() {
             UpdateSellInProperty();
             UpdateQualityProperty();
 

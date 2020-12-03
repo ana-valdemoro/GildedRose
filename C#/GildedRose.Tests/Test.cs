@@ -27,7 +27,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedLegendaryItem = gildedRose.BaseItems.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            BaseItem expectedLegendaryItem = gildedRose.BaseItems.First(baseItem => baseItem.Name == "Sulfuras, Hand of Ragnaros");
             expectedLegendaryItem.Quality.Should().Be(80);
             expectedLegendaryItem.SellIn.Should().Be(0);
 
@@ -42,7 +42,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedItem = gildedRose.BaseItems.First(item => item.Name == "Cheetos");
+            BaseItem expectedItem = gildedRose.BaseItems.First(baseItem => baseItem.Name == "Cheetos");
             expectedItem.Quality.Should().Be(34);
 
         }
@@ -55,7 +55,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedItem = gildedRose.BaseItems.First(item => item.Name == "Cheetos");
+            BaseItem expectedItem = gildedRose.BaseItems.First(item => item.Name == "Cheetos");
             expectedItem.Quality.Should().Be(34);
             expectedItem.SellIn.Should().Be(1);
 
@@ -70,7 +70,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
+            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(36);
             expectedAgedItem.SellIn.Should().Be(2);
 
@@ -85,7 +85,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
+            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(37);
             expectedAgedItem.SellIn.Should().Be(-1);
 
@@ -100,7 +100,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(36);
             expectedBackstagePassesItem.SellIn.Should().Be(11);
 
@@ -115,7 +115,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(37);
             expectedBackstagePassesItem.SellIn.Should().Be(9);
 
@@ -129,7 +129,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(38);
             expectedBackstagePassesItem.SellIn.Should().Be(4);
 
@@ -144,7 +144,7 @@ namespace GildedRose.Tests {
 
             gildedRose.UpdateBaseItems();
 
-            Item expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstagePassesItem.Quality.Should().Be(0);
 
         }
@@ -161,13 +161,13 @@ namespace GildedRose.Tests {
             GildedRose gildedRose = new GildedRose(basedList );
 
             gildedRose.UpdateBaseItems();
-            Item expectedLegendaryItem = gildedRose.BaseItems.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            BaseItem expectedLegendaryItem = gildedRose.BaseItems.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
             expectedLegendaryItem.Quality.Should().Be(80);
             expectedLegendaryItem.SellIn.Should().Be(0);
-            Item expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
+            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(36);
             expectedAgedItem.SellIn.Should().Be(2);
-            Item expectedBackstage = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstage = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstage.Quality.Should().Be(0);
             expectedBackstage.SellIn.Should().Be(-1);
 
