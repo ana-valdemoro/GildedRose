@@ -2,12 +2,12 @@
     public class AgedBrie : BaseItem {
         public AgedBrie(int quality, int sellIn) : base("Aged Brie", quality, sellIn){ }
 
-        protected internal override void UpdateItemProperties() {
-            UpdateSellInProperty();
-            UpdateQualityProperty();
+        protected internal override void UpdateState() {
+            UpdateSellIn();
+            UpdateQuality();
 
         }
-        private void UpdateQualityProperty() {
+        private void UpdateQuality() {
             Quality += QualityIncrease();
 
         }

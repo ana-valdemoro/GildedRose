@@ -18,9 +18,9 @@ namespace GildedRose.Tests {
         }
 
 
-        [Test]
+        /*[Test]
         public void Check_UpdateQuality_For_Legendary_Item() {
-            LegendaryItem legendaryItem = new LegendaryItem();
+            Sulfuras legendaryItem = new Sulfuras();
             List<BaseItem> initialList = new List<BaseItem>();
             initialList.Add(legendaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
@@ -151,7 +151,7 @@ namespace GildedRose.Tests {
 
         [Test]
         public void Check_Creation_Legendary_Item() {
-            LegendaryItem legendaryItem = new LegendaryItem();
+            Sulfuras legendaryItem = new Sulfuras();
             AgedBrie agedItem = new AgedBrie(35, 3);
             BackstagePasses backstage = new BackstagePasses(35,0);
             IList<BaseItem> basedList = new List<BaseItem>();
@@ -171,6 +171,20 @@ namespace GildedRose.Tests {
             expectedBackstage.Quality.Should().Be(0);
             expectedBackstage.SellIn.Should().Be(-1);
 
+        }*/
+
+        [Test]
+        public void Check_GildedRose_Class()
+        {
+            List<Item> initialList = new List<Item>();
+            Item legendary = new Item() {Name = "Sulfuras, Hand of Ragnaros", Quality = 80, SellIn = 0};
+            initialList.Add(legendary);
+            GildedRose gildedRose = new GildedRose(initialList);
+
+            gildedRose.UpdateItems();
+            Item expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            expectedLegendaryItem.Quality.Should().Be(80);
+            expectedLegendaryItem.SellIn.Should().Be(0);
 
 
         }
