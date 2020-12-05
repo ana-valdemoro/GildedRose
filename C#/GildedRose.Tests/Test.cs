@@ -18,74 +18,89 @@ namespace GildedRose.Tests {
         }
 
 
-        /*[Test]
+        [Test]
         public void Check_UpdateQuality_For_Legendary_Item() {
-            Sulfuras legendaryItem = new Sulfuras();
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item legendaryItem = new Item() { Name = Constants.Sulfuras }; 
+            IList<Item> initialList = new List<Item>();
             initialList.Add(legendaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedLegendaryItem = gildedRose.BaseItems.First(baseItem => baseItem.Name == "Sulfuras, Hand of Ragnaros");
-            expectedLegendaryItem.Quality.Should().Be(80);
-            expectedLegendaryItem.SellIn.Should().Be(0);
+            var expectedLegendaryItem = gildedRose.Items.First(baseItem => baseItem.Name == Constants.Sulfuras);
+            expectedLegendaryItem.Quality.Should().Be(Constants.SulfurasQuality);
+            expectedLegendaryItem.SellIn.Should().Be(Constants.SulfurasSellIn);
 
         }
 
         [Test]
         public void Check_UpdateQuality_For_Ordinary_Item() {
-            OrdinaryItem ordinaryItem = new OrdinaryItem("Cheetos", 35, 2) ;
-            List<BaseItem> baseList = new List<BaseItem>();
+            Item ordinaryItem = new Item() {Name = "Cheetos", Quality = 35 , SellIn = 2 };
+            List<Item> baseList = new List<Item>();
             baseList.Add(ordinaryItem);
             GildedRose gildedRose = new GildedRose(baseList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedItem = gildedRose.BaseItems.First(baseItem => baseItem.Name == "Cheetos");
-            expectedItem.Quality.Should().Be(34);
-
-        }
-        [Test]
-        public void Check_UpdateQuality_For_Ordinary_Item_When_SellIn_Property_Is_0() {
-            OrdinaryItem ordinaryItem = new OrdinaryItem("Cheetos", 35, 2);
-            List<BaseItem> initialList = new List<BaseItem>();
-            initialList.Add(ordinaryItem);
-            GildedRose gildedRose = new GildedRose(initialList);
-
-            gildedRose.UpdateBaseItems();
-
-            BaseItem expectedItem = gildedRose.BaseItems.First(item => item.Name == "Cheetos");
+            var expectedItem = gildedRose.Items.First(baseItem => baseItem.Name == "Cheetos");
             expectedItem.Quality.Should().Be(34);
             expectedItem.SellIn.Should().Be(1);
 
         }
         [Test]
-        public void Check_UpdateQuality_For_Aged_Item()
-        {
-            AgedBrie agedItem = new AgedBrie(35,3);
-            List<BaseItem> initialList = new List<BaseItem>();
-            initialList.Add(agedItem);
-            GildedRose gildedRose = new GildedRose(initialList);
+        public void Check_UpdateQuality_For_Ordinary_Item_When_SellIn_Property_Is_0() {
+            Item ordinaryItem = new Item() { Name = "Cheetos", Quality = 35, SellIn = 0 };
+            List<Item> baseList = new List<Item>();
+            baseList.Add(ordinaryItem);
+            GildedRose gildedRose = new GildedRose(baseList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
-            expectedAgedItem.Quality.Should().Be(36);
-            expectedAgedItem.SellIn.Should().Be(2);
+            var expectedItem = gildedRose.Items.First(baseItem => baseItem.Name == "Cheetos");
+            expectedItem.Quality.Should().Be(33);
+            expectedItem.SellIn.Should().Be(-1);
 
         }
         [Test]
-        public void Check_UpdateQuality_For_Aged_Item_When_SellIn_Property_Is_0()
+        public void Check_UpdateQuality_For_Aged_Item()
         {
-            AgedBrie agedItem = new AgedBrie(35, 0);
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item agedItem = new Item(){Name = Constants.AgedBrie, Quality = 35, SellIn = 3};
+            List<Item> initialList = new List<Item>();
             initialList.Add(agedItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
+            var expectedAgedItem = gildedRose.Items.First(item => item.Name == Constants.AgedBrie);
+            expectedAgedItem.Quality.Should().Be(36);
+            expectedAgedItem.SellIn.Should().Be(2);
+        }
+        [Test]
+        public void Check_UpdateQuality_For_Aged_Item_When_Quality_has_Maximum_Value()
+        {
+            Item agedItem = new Item() { Name = Constants.AgedBrie, Quality = Constants.MaximumQuality, SellIn = 3 };
+            List<Item> initialList = new List<Item>();
+            initialList.Add(agedItem);
+            GildedRose gildedRose = new GildedRose(initialList);
+
+            gildedRose.UpdateItems();
+
+            var expectedAgedItem = gildedRose.Items.First(item => item.Name == Constants.AgedBrie);
+            expectedAgedItem.Quality.Should().Be(Constants.MaximumQuality);
+            expectedAgedItem.SellIn.Should().Be(2);
+        }
+
+        [Test]
+        public void Check_UpdateQuality_For_Aged_Item_When_SellIn_Property_Is_0()
+        {
+            Item agedItem = new Item() { Name = Constants.AgedBrie, Quality = 35, SellIn = 0 };
+            List<Item> initialList = new List<Item>();
+            initialList.Add(agedItem);
+            GildedRose gildedRose = new GildedRose(initialList);
+
+            gildedRose.UpdateItems();
+
+            var expectedAgedItem = gildedRose.Items.First(item => item.Name == Constants.AgedBrie);
             expectedAgedItem.Quality.Should().Be(37);
             expectedAgedItem.SellIn.Should().Be(-1);
 
@@ -93,43 +108,43 @@ namespace GildedRose.Tests {
         [Test]
         public void Check_UpdateQuality_For_Backstage_Passes()
         {
-            BackstagePasses backstagePasessItem = new BackstagePasses(35, 12);
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item backstagePasessItem = new Item(){Name = Constants.BactagePasses, Quality = 35, SellIn = 12};
+            List<Item> initialList = new List<Item>();
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            var expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == Constants.BactagePasses);
             expectedBackstagePassesItem.Quality.Should().Be(36);
             expectedBackstagePassesItem.SellIn.Should().Be(11);
 
         }
-        [Test]
+       [Test]
         public void Check_UpdateQuality_For_Backstage_Passes_When_SellIn_Property_Is_Less_Than_10_days()
         {
-            BackstagePasses backstagePasessItem = new BackstagePasses(35, 10);
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item backstagePasessItem = new Item() { Name = Constants.BactagePasses, Quality = 35, SellIn = 10 };
+            List<Item> initialList = new List<Item>();
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            var expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == Constants.BactagePasses);
             expectedBackstagePassesItem.Quality.Should().Be(37);
             expectedBackstagePassesItem.SellIn.Should().Be(9);
 
         }
         [Test]
         public void Check_UpdateQuality_For_Backstage_Passes_When_SellIn_Property_Is_Less_Than_5_days() {
-            BackstagePasses backstagePasessItem = new BackstagePasses(35, 5);
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item backstagePasessItem = new Item() { Name = Constants.BactagePasses, Quality = 35, SellIn = 5 };
+            List<Item> initialList = new List<Item>();
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            var expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == Constants.BactagePasses);
             expectedBackstagePassesItem.Quality.Should().Be(38);
             expectedBackstagePassesItem.SellIn.Should().Be(4);
 
@@ -137,54 +152,60 @@ namespace GildedRose.Tests {
         }
         [Test]
         public void Check_UpdateQuality_For_Backstage_Passes_When_SellIn_Property_Is_0() {
-            BackstagePasses backstagePasessItem = new BackstagePasses(35, 0);
-            List<BaseItem> initialList = new List<BaseItem>();
+            Item backstagePasessItem = new Item() { Name = Constants.BactagePasses, Quality = 35, SellIn = 0 };
+            List<Item> initialList = new List<Item>();
             initialList.Add(backstagePasessItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
-            gildedRose.UpdateBaseItems();
+            gildedRose.UpdateItems();
 
-            BaseItem expectedBackstagePassesItem = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            var expectedBackstagePassesItem = gildedRose.Items.First(item => item.Name == Constants.BactagePasses);
             expectedBackstagePassesItem.Quality.Should().Be(0);
+            expectedBackstagePassesItem.SellIn.Should().Be(-1);
 
         }
 
-        [Test]
+        /*[Test]
         public void Check_Creation_Legendary_Item() {
-            Sulfuras legendaryItem = new Sulfuras();
-            AgedBrie agedItem = new AgedBrie(35, 3);
-            BackstagePasses backstage = new BackstagePasses(35,0);
-            IList<BaseItem> basedList = new List<BaseItem>();
+            Item legendaryItem = new Item(){Name = Constants.Sulfuras, Quality = 80, SellIn = 2};
+            Item agedItem = new Item(){Name = Constants.AgedBrieName, Quality = 35,SellIn = 3 };
+            Item backstage = new Item(35,0);
+            IList<Item> basedList = new List<Item>();
             basedList.Add(legendaryItem);
             basedList.Add(agedItem);
             basedList.Add(backstage);
             GildedRose gildedRose = new GildedRose(basedList );
 
-            gildedRose.UpdateBaseItems();
-            BaseItem expectedLegendaryItem = gildedRose.BaseItems.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            gildedRose.UpdateItems();
+            BaseItem expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
             expectedLegendaryItem.Quality.Should().Be(80);
             expectedLegendaryItem.SellIn.Should().Be(0);
-            BaseItem expectedAgedItem = gildedRose.BaseItems.First(item => item.Name == "Aged Brie");
+            BaseItem expectedAgedItem = gildedRose.Items.First(item => item.Name == "Aged Brie");
             expectedAgedItem.Quality.Should().Be(36);
             expectedAgedItem.SellIn.Should().Be(2);
-            BaseItem expectedBackstage = gildedRose.BaseItems.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
+            BaseItem expectedBackstage = gildedRose.Items.First(item => item.Name == "Backstage passes to a TAFKAL80ETC concert");
             expectedBackstage.Quality.Should().Be(0);
             expectedBackstage.SellIn.Should().Be(-1);
 
-        }*/
-
+        }
+        */
         [Test]
-        public void Check_GildedRose_Class()
+        public void Check_UpdateItems_For_A_List_Of_Two_Items()
         {
             List<Item> initialList = new List<Item>();
-            Item legendary = new Item() {Name = "Sulfuras, Hand of Ragnaros", Quality = 80, SellIn = 0};
+            Item legendary = new Item() {Name = Constants.Sulfuras};
+            Item ordinaryItem = new Item() { Name = "Cheetos", Quality = 35, SellIn = 0 };
             initialList.Add(legendary);
+            initialList.Add(ordinaryItem);
             GildedRose gildedRose = new GildedRose(initialList);
 
             gildedRose.UpdateItems();
-            Item expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
+            var expectedLegendaryItem = gildedRose.Items.First(item => item.Name == "Sulfuras, Hand of Ragnaros");
             expectedLegendaryItem.Quality.Should().Be(80);
             expectedLegendaryItem.SellIn.Should().Be(0);
+            var expectedOrdinaryItem = gildedRose.Items.First(item => item.Name == "Cheetos");
+            expectedOrdinaryItem.Quality.Should().Be(33);
+            expectedOrdinaryItem.SellIn.Should().Be(-1);
 
 
         }

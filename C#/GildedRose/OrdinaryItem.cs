@@ -13,8 +13,8 @@
             Quality -= QualityDecrease();
         }
         private int QualityDecrease() {
-            if (SellIn < Deadline && Quality - 2 >= MinimumQuality) return 2;
-            return Quality - 1 >= MinimumQuality ? 1 : 0;
+            if (SellIn < Constants.Deadline && Quality - 2 >= Constants.MinimumQuality) return 2;
+            return Quality - 1 >= Constants.MinimumQuality ? 1 : 0;
         }
     }
 }

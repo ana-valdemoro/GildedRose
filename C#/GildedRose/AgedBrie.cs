@@ -1,6 +1,6 @@
 ﻿namespace GildedRose {
     public class AgedBrie : BaseItem {
-        public AgedBrie(int quality, int sellIn) : base("Aged Brie", quality, sellIn){ }
+        public AgedBrie(string name, int quality, int sellIn) : base(name, quality, sellIn){ }
 
         protected internal override void UpdateState() {
             UpdateSellIn();
@@ -13,8 +13,8 @@
         }
 
         private int QualityIncrease() {
-            if (SellIn < Deadline && Quality + 2 <= MaximumQuality) return 2;
-            return Quality + 1 <= MaximumQuality ? 1 : 0;
+            if (SellIn < Constants.Deadline && Quality + 2 <= Constants.MaximumQuality) return 2;
+            return Quality + 1 <= Constants.MaximumQuality ? 1 : 0;
         }
 
     }

@@ -1,37 +1,37 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using GildedRose.ConcreteFactories;
 
 namespace GildedRose
 {
     public class GildedRose
     {
         public IList<Item> Items { get; set; }
-        
-        public GildedRose(IList<Item> Items) {
-            this.Items = Items;
+
+        public GildedRose(IList<Item> items) {
+            Items = items;
+
         }
-       
 
         public void UpdateItems() {
             foreach (var item in Items)
             {
-                var baseItem = getBaseItem(item);
-                baseItem.UpdateState();
-                item.Quality = baseItem.Quality;
-                item.SellIn = baseItem.SellIn;
+                UpdateItem(item);
             }
 
         }
 
-        private BaseItem getBaseItem(Item item)
+        private void UpdateItem(Item item)
         {
-            return new ItemFactory(item).CreateItem(item);
+            var baseItem = ItemFactory.CreateItem(item);
+            baseItem.UpdateState();
+            item.Quality = baseItem.Quality;
+            item.SellIn = baseItem.SellIn;
         }
 
 
     }
 
-   
 }
     
 
