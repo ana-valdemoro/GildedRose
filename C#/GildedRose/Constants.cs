@@ -15,5 +15,7 @@ namespace GildedRose
         public const int Deadline = 0;
         public const int MinimumQuality = 0;
         public const int MaximumQuality = 50;
+        public const int DeadlineToDuplicateQuality = 10;
+        public const int DeadlineToTriplicateQuality = 5;
     }
 }
