@@ -7,11 +7,11 @@ namespace GildedRose
     public class GildedRose
     {
         public IList<Item> Items { get; set; }
-        private ItemFactory Ifactory { get; set; }
+        private FactoryManager FactoryManager { get; set; }
 
         public GildedRose(IList<Item> items) {
             Items = items;
-            Ifactory = new ItemFactory();
+            FactoryManager = new FactoryManager();
         }
 
         public void UpdateItems() {
@@ -22,11 +22,8 @@ namespace GildedRose
 
         }
 
-        private void UpdateItem(Item item) {
-            var baseItem = Ifactory.CreateItem(item);
-            baseItem.UpdateState();
-            item.Quality = baseItem.Quality;
-            item.SellIn = baseItem.SellIn;
+        private void UpdateItem(Item item) { 
+           FactoryManager.RequestItemUpdate(item);
         }
 
 

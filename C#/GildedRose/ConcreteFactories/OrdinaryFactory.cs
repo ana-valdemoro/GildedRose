@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace GildedRose.ConcreteFactories
 {
-    public class OrdinaryFactory
+    public class OrdinaryFactory: ItemFactory
     {
-        public  BaseItem CreateItem(Item item)
+        public override BaseItem CreateItem(Item item)
         {
             return new OrdinaryItem(item.Name, item.Quality, item.SellIn);
         }
