@@ -1,4 +1,6 @@
 ﻿
+using GildedRose.Items;
+
 namespace GildedRose.ConcreteFactories
 {
     public class OrdinaryFactory: ItemFactory

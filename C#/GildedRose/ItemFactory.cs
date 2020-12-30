@@ -1,4 +1,6 @@
-﻿namespace GildedRose {
+﻿using GildedRose.Items;
+
+namespace GildedRose {
     public abstract class ItemFactory
     {
         public void UpdateItem(Item item)

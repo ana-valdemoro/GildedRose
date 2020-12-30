@@ -1,4 +1,4 @@
-﻿namespace GildedRose {
+﻿namespace GildedRose.Items {
     public class BackstagePasses: BaseItem {
         public BackstagePasses(string name, int quality, int sellIn) : base(name, quality, sellIn) { }
 

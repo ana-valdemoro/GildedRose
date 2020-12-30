@@ -1,4 +1,4 @@
-﻿namespace GildedRose {
+﻿namespace GildedRose.Items {
     public class OrdinaryItem: BaseItem {
 
         public OrdinaryItem(string name, int quality, int sellIn) : base(name, quality, sellIn) { }

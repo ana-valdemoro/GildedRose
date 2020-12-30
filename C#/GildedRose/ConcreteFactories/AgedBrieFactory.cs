@@ -1,4 +1,6 @@
-﻿namespace GildedRose.ConcreteFactories
+﻿using GildedRose.Items;
+
+namespace GildedRose.ConcreteFactories
 {
     public class AgedBrieFactory : ItemFactory
     {
